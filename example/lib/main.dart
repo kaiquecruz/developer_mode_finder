@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     try {
       isEnabled = await DeveloperModeFinder().isDeveloperModeEnabled();
     } catch (e) {
-      print('Error checking developer mode: $e');
+      debugPrint('Error checking developer mode: $e');
     }
 
     setState(() {

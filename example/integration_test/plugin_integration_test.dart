@@ -14,11 +14,11 @@ import 'package:developer_mode_finder/developer_mode_finder.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('getPlatformVersion test', (WidgetTester tester) async {
+  testWidgets('isDeveloperModeEnabled check', (WidgetTester tester) async {
     final DeveloperModeFinder plugin = DeveloperModeFinder();
-    final bool version = await plugin.isDeveloperModeEnabled();
-    // The version string depends on the host platform running the test, so
-    // just assert that some non-empty string is returned.
-    expect(version, true);
+    final bool isEnabled = await plugin.isDeveloperModeEnabled();
+    // The value depends on the device/simulator state, we just verify it returns a boolean.
+    expect(isEnabled, isA<bool>());
   });
 }
+

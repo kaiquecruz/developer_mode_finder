@@ -31,15 +31,22 @@ void main() {
   test('isDeveloperModeEnabled returns false', () async {
     DeveloperModeFinder developerModeFinderPlugin = DeveloperModeFinder();
 
-    // Create a mock that returns false
-    MockDeveloperModeFinderPlatform fakePlatform =
-        MockDeveloperModeFinderPlatformFalse()
-            as MockDeveloperModeFinderPlatform;
+    MockDeveloperModeFinderPlatformFalse fakePlatform =
+        MockDeveloperModeFinderPlatformFalse();
     DeveloperModeFinderPlatform.instance = fakePlatform;
 
     expect(await developerModeFinderPlugin.isDeveloperModeEnabled(), false);
   });
+
+  test('static isEnabled shortcut works', () async {
+    DeveloperModeFinderPlatform.instance = MockDeveloperModeFinderPlatform();
+    expect(await DeveloperModeFinder.isEnabled, true);
+
+    DeveloperModeFinderPlatform.instance = MockDeveloperModeFinderPlatformFalse();
+    expect(await DeveloperModeFinder.isEnabled, false);
+  });
 }
+
 
 class MockDeveloperModeFinderPlatformFalse
     with MockPlatformInterfaceMixin
